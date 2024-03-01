@@ -1,5 +1,8 @@
 # Development leftovers
 .direnv
 
+# Distribution data
+.dist
+
 # Infrastructure remnants
 .terraform
