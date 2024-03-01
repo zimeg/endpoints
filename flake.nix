@@ -14,6 +14,7 @@
       {
         devShell = pkgs.mkShell {
           buildInputs = [
+            pkgs.awscli2
             pkgs.opentofu
           ];
         };
