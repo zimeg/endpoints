@@ -112,3 +112,16 @@ resource "aws_api_gateway_stage" "prod" {
   rest_api_id   = aws_api_gateway_rest_api.endpoints.id
   stage_name    = "prod"
 }
+
+# Domain
+
+resource "aws_api_gateway_domain_name" "api" {
+  certificate_arn = aws_acm_certificate_validation.cert.certificate_arn
+  domain_name     = var.domain
+}
+
+resource "aws_api_gateway_base_path_mapping" "api" {
+  api_id      = aws_api_gateway_rest_api.endpoints.id
+  stage_name  = aws_api_gateway_stage.prod.stage_name
+  domain_name = aws_api_gateway_domain_name.api.domain_name
+}

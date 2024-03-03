@@ -1,5 +1,6 @@
 # Development leftovers
 .direnv
+.env
 
 # Distribution data
 .dist
