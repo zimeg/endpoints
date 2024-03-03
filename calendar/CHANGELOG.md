@@ -8,6 +8,7 @@ new major version.
 
 ## Changes - `v1`
 
+- docs: unveil a new endpoint for discovering the present date 2024-03-03
 - feat: return gregorian values for requests of the date today 2024-03-02
 - feat: respond with the expected object type for lambda invocations 2024-03-02
 - feat: prepare plans for casual computations on dates of a calendar 2024-02-29
