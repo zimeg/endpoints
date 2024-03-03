@@ -2,6 +2,9 @@ import { today } from "today.js";
 
 function router(event) {
     const path = event.pathParameters?.path;
+    if (path === "today") {
+        return today();
+    }
     return {
         status: 404,
         body: {
