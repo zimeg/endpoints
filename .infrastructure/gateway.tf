@@ -38,6 +38,57 @@ resource "aws_api_gateway_integration" "calendar" {
   uri                     = aws_lambda_function.calendar_v1.invoke_arn
 }
 
+# 404 Not Found
+
+resource "aws_api_gateway_resource" "fallback" {
+  rest_api_id = aws_api_gateway_rest_api.endpoints.id
+  parent_id   = aws_api_gateway_rest_api.endpoints.root_resource_id
+  path_part   = "{fallback+}"
+}
+
+resource "aws_api_gateway_integration" "fallback" {
+  rest_api_id = aws_api_gateway_rest_api.endpoints.id
+  resource_id = aws_api_gateway_resource.fallback.id
+  http_method = "ANY"
+  type        = "MOCK"
+  request_templates = {
+    "application/json" = "{\"statusCode\": 404}"
+  }
+  depends_on = [aws_api_gateway_resource.fallback]
+}
+
+resource "aws_api_gateway_method" "fallback" {
+  rest_api_id   = aws_api_gateway_rest_api.endpoints.id
+  resource_id   = aws_api_gateway_resource.fallback.id
+  http_method   = "ANY"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_method_response" "not_found" {
+  rest_api_id = aws_api_gateway_rest_api.endpoints.id
+  resource_id = aws_api_gateway_resource.fallback.id
+  http_method = aws_api_gateway_integration.fallback.http_method
+  status_code = "404"
+}
+
+resource "aws_api_gateway_integration_response" "not_found" {
+  rest_api_id = aws_api_gateway_rest_api.endpoints.id
+  resource_id = aws_api_gateway_resource.fallback.id
+  http_method = aws_api_gateway_integration.fallback.http_method
+  status_code = aws_api_gateway_method_response.not_found.status_code
+
+  response_templates = {
+    "application/json" = jsonencode({
+      ok = false,
+      error = {
+        code    = "method_not_found",
+        message = "The provided path has no $context.httpMethod method: $context.path",
+      }
+    })
+  }
+  depends_on = [aws_api_gateway_integration.fallback]
+}
+
 # Deployment
 
 resource "aws_api_gateway_deployment" "deployment" {
@@ -49,6 +100,7 @@ resource "aws_api_gateway_deployment" "deployment" {
 
   depends_on = [
     aws_api_gateway_resource.calendar_proxy,
+    aws_api_gateway_integration_response.not_found,
   ]
   triggers = {
     redeploy_calendar = sha1(jsonencode(aws_api_gateway_integration.calendar))
