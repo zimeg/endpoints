@@ -10,7 +10,8 @@ Various methods provide different information about different times:
 
 ### `GET /today`
 
-Recall the current calendar date, aligned to coordinated univeral time (UTC).
+Recall the current calendar date, aligned to [coordinated universal time][utc]
+(UTC).
 
 ```sh
 $ curl https://api.o526.net/v1/calendar/today
@@ -46,3 +47,4 @@ $ curl https://api.o526.net/v1/calendar/today
 
 [8601]: https://en.wikipedia.org/wiki/ISO_8601
 [gregorian]: https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar
+[utc]: https://en.wikipedia.org/wiki/Coordinated_Universal_Time
