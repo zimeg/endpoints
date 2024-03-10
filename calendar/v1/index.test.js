@@ -31,6 +31,20 @@ describe("expected object for lambda invocations", () => {
 });
 
 describe("known paths have an okay return", () => {
+    it("returns a true ok for leapyear", () => {
+        const event = {
+            httpMethod: "GET",
+            path: "/v1/calendar/leapyear/2024",
+            pathParameters: {
+                path: "leapyear/2024",
+            },
+        };
+        const response = handler(event, undefined);
+        const values = JSON.parse(response.body);
+        assert.equal(response.statusCode, 200);
+        assert.equal(values.ok, true);
+    });
+
     it("returns a true ok for today", () => {
         const event = {
             httpMethod: "GET",

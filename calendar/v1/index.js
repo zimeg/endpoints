@@ -1,8 +1,11 @@
+import { leapyear } from "leapyear.js";
 import { today } from "today.js";
 
 function router(event) {
     const path = event.pathParameters?.path;
-    if (path === "today") {
+    if (path.startsWith("leapyear")) {
+        return leapyear(path);
+    } else if (path === "today") {
         return today();
     }
     return {

@@ -8,6 +8,7 @@ new major version.
 
 ## Changes - `v1`
 
+- feat: determine if leap days exists within the provided year 2024-03-10
 - docs: reference information about coordinated universal time 2024-03-10
 - docs: unveil a new endpoint for discovering the present date 2024-03-03
 - feat: return gregorian values for requests of the date today 2024-03-02
