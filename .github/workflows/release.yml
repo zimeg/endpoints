@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Release changes
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  release:
+    name: Publish valid changes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Prepare Tofu tooling
+        uses: opentofu/setup-opentofu@v1
+      - name: Outline known infrustructure
+        working-directory: .infrastructure
+        run: tofu init
+      - name: Ensure infrastructure reason
+        working-directory: .infrastructure
+        run: |
+          tofu fmt -check
+          tofu validate
+      - name: Install a flaked Nix
+        uses: DeterminateSystems/nix-installer-action@v12
+      - name: Perform unit tests
+        run: |
+          (cd calendar && nix develop -c npm test)
+      - name: Plan the infrastructure changes
+        if: github.event_name == 'pull_request'
+        working-directory: .infrastructure
+        run: tofu plan
+      - name: Push to production
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        working-directory: .infrastructure
+        run: tofu apply -auto-approve
