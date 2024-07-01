@@ -8,6 +8,7 @@ new major version.
 
 ## Changes - `v1`
 
+- style: reformat project code according to rules of the biome 2024-06-30
 - build: create a project package file for known calendar code 2024-06-30
 - feat: determine if leap days exists within the provided year 2024-03-10
 - docs: reference information about coordinated universal time 2024-03-10
