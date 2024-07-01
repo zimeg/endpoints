@@ -38,7 +38,11 @@ jobs:
         if: github.event_name == 'pull_request'
         working-directory: .infrastructure
         run: tofu plan
+        env:
+          TF_VAR_hosted_zone_id: ${{ secrets.AWS_HOSTED_ZONE_ID }}
       - name: Push to production
         if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
         working-directory: .infrastructure
         run: tofu apply -auto-approve
+        env:
+          TF_VAR_hosted_zone_id: ${{ secrets.AWS_HOSTED_ZONE_ID }}
