@@ -45,6 +45,20 @@ describe("known paths have an okay return", () => {
     assert.equal(values.ok, true);
   });
 
+  it("returns a true ok for epoch", () => {
+    const event = {
+      httpMethod: "GET",
+      path: "/v1/calendar/epoch",
+      pathParameters: {
+        path: "epoch",
+      },
+    };
+    const response = handler(event, undefined);
+    const values = JSON.parse(response.body);
+    assert.equal(response.statusCode, 200);
+    assert.equal(values.ok, true);
+  });
+
   it("returns a true ok for today", () => {
     const event = {
       httpMethod: "GET",

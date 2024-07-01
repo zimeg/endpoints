@@ -1,3 +1,4 @@
+import { epoch } from "epoch.js";
 import { leapyear } from "leapyear.js";
 import { today } from "today.js";
 
@@ -5,6 +6,8 @@ function router(event) {
   const path = event.pathParameters?.path;
   if (path.startsWith("leapyear")) {
     return leapyear(path);
+  } else if (path === "epoch") {
+    return epoch();
   } else if (path === "today") {
     return today();
   }

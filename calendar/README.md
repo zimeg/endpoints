@@ -6,8 +6,43 @@ Measurements of dates and days for the present moment.
 
 Various methods provide different information about different times:
 
+- [`GET /epoch`](#get-epoch) - compute the current epoch time
 - [`GET /leapyear`](#get-leapyear) - determine if a leap day exists
 - [`GET /today`](#get-today) - recall the current calendar date
+
+### `GET /epoch`
+
+Compute the current [epoch time][epoch] as seconds. Sometimes later than initial
+requests but before the response.
+
+```sh
+$ curl https://api.o526.net/v1/calendar/epoch
+```
+
+#### Expected output
+
+##### `ok`
+
+Boolean. If the response completed with success. Tends to be `true`.
+
+##### `epoch`
+
+Integer. The number of seconds since [epoch time][epoch] began. Changes often.
+
+#### Example usage
+
+A check of the epoch at some moment might return the following:
+
+```sh
+$ curl https://api.o526.net/v1/calendar/epoch
+```
+
+```json
+{
+  "ok": true,
+  "epoch": 1645568542
+}
+```
 
 ### `GET /leapyear`
 
@@ -44,8 +79,8 @@ $ curl https://api.o526.net/v1/calendar/leapyear/2024
 
 ```json
 {
-    "ok": true,
-    "leapyear": true
+  "ok": true,
+  "leapyear": true
 }
 ```
 
@@ -79,10 +114,10 @@ $ curl https://api.o526.net/v1/calendar/today
 
 ```json
 {
-    "ok": true,
-    "dates": {
-        "gregorian": "2024-10-31"
-    }
+  "ok": true,
+  "dates": {
+    "gregorian": "2024-10-31"
+  }
 }
 ```
 
@@ -92,12 +127,12 @@ Invalid or unexpected requests can cause responses to return with an error:
 
 ```json
 {
-    "ok": false,
-    "error": {
-        "code": "calendar_error_code",
-        "message": "Something strange happened",
-        "remediation": "Try changing this"
-    }
+  "ok": false,
+  "error": {
+    "code": "calendar_error_code",
+    "message": "Something strange happened",
+    "remediation": "Try changing this"
+  }
 }
 ```
 
@@ -135,6 +170,7 @@ The provided year has an invalid format. Use an integer.
 No year was provided. Include a year with the request.
 
 [8601]: https://en.wikipedia.org/wiki/ISO_8601
+[epoch]: https://en.wikipedia.org/wiki/Epoch_(computing)
 [error-codes]: #error-codes
 [errors]: #errors
 [gregorian]: https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar
