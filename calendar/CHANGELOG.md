@@ -8,6 +8,7 @@ new major version.
 
 ## Changes - `v1`
 
+- build: create a project package file for known calendar code 2024-06-30
 - feat: determine if leap days exists within the provided year 2024-03-10
 - docs: reference information about coordinated universal time 2024-03-10
 - docs: unveil a new endpoint for discovering the present date 2024-03-03
@@ -15,6 +16,5 @@ new major version.
 - feat: respond with the expected object type for lambda invocations 2024-03-02
 - feat: prepare plans for casual computations on dates of a calendar 2024-02-29
 
-<!-- a collection of links -->
 [calver]: https://calver.org
 [commits]: https://www.conventionalcommits.org/en/v1.0.0/
