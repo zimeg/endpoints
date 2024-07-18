@@ -9,6 +9,12 @@ describe("formatted recollections of today", () => {
     };
     assert.equal(response.status, 200);
     assert.equal(response.body.ok, true);
+    assert.equal(
+      new Date(now.getUTCFullYear(), 0, response.body.offset)
+        .toISOString()
+        .split("T")[0],
+      now.toISOString().split("T")[0],
+    );
     assert.equal(response.body.dates.gregorian, expected.gregorian);
   });
 });

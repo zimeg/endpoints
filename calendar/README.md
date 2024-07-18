@@ -99,6 +99,11 @@ $ curl https://api.o526.net/v1/calendar/today
 
 Boolean. If the response completed with success. Tends to be `true`.
 
+##### `offset`
+
+Integer. Days since this [proleptic Gregorian calendar][gregorian] year began.
+Counting starts at `1`.
+
 ##### `dates.gregorian`
 
 String. The date according to the [proleptic Gregorian calendar][gregorian] in
@@ -115,6 +120,7 @@ $ curl https://api.o526.net/v1/calendar/today
 ```json
 {
   "ok": true,
+  "offset": 305,
   "dates": {
     "gregorian": "2024-10-31"
   }
