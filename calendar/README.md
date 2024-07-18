@@ -111,8 +111,8 @@ String. The date according to the [proleptic Gregorian calendar][gregorian] in
 
 ##### `dates.quintus`
 
-String. The date according to the [five day Quintus calendar][quintus] also in
-[ISO 8601][8601] format.
+String. The date according to the [five day Quintus calendar][quintus] in the
+`YYYY-MM-DD` format.
 
 #### Example usage
 

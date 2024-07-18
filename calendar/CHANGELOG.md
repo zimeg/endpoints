@@ -8,6 +8,7 @@ new major version.
 
 ## Changes - `v1`
 
+- docs: describe the quintus format using the generic notation 2024-07-17
 - feat: return the quintus date of this current date for today 2024-07-17
 - feat: return an offset count of days since starting the year 2024-07-17
 - feat: return an epoch offset from around the time of request 2024-06-30
