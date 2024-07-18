@@ -102,11 +102,16 @@ Boolean. If the response completed with success. Tends to be `true`.
 ##### `offset`
 
 Integer. Days since this [proleptic Gregorian calendar][gregorian] year began.
-Counting starts at `1`.
+Counts start at `1`.
 
 ##### `dates.gregorian`
 
 String. The date according to the [proleptic Gregorian calendar][gregorian] in
+[ISO 8601][8601] format.
+
+##### `dates.quintus`
+
+String. The date according to the [five day Quintus calendar][quintus] also in
 [ISO 8601][8601] format.
 
 #### Example usage
@@ -122,7 +127,8 @@ $ curl https://api.o526.net/v1/calendar/today
   "ok": true,
   "offset": 305,
   "dates": {
-    "gregorian": "2024-10-31"
+    "gregorian": "2024-10-31",
+    "quintus": "2024-11-05"
   }
 }
 ```
@@ -181,4 +187,5 @@ No year was provided. Include a year with the request.
 [errors]: #errors
 [gregorian]: https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar
 [leapyear]: https://en.wikipedia.org/wiki/Leap_year
+[quintus]: https://o526.net/blog/post/five-day-week
 [utc]: https://en.wikipedia.org/wiki/Coordinated_Universal_Time
