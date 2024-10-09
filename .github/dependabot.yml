@@ -13,3 +13,15 @@ updates:
       interval: "monthly"
     labels:
       - "dependencies"
+  - package-ecosystem: "terraform"
+    directory: ".infrastructure"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+registries:
+  opentofu:
+    type: git
+    url: https://github.com/opentofu/registry
+    username: x-access-token
+    password: ${{secrets.OPENTOFU_REGISTRY_TOKEN}}
