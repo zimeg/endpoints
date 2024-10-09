@@ -1,16 +1,16 @@
 terraform {
   required_providers {
     archive = {
-      source  = "hashicorp/archive"
-      version = "~> 2.4.2"
+      source  = "opentofu/archive"
+      version = "2.6.0"
     }
     aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.39.0"
+      source  = "opentofu/aws"
+      version = "5.68.0"
     }
     null = {
-      source  = "hashicorp/null"
-      version = "~> 3.2.2"
+      source  = "opentofu/null"
+      version = "3.2.3"
     }
   }
   backend "s3" {
@@ -19,7 +19,7 @@ terraform {
     region         = "us-east-1"
     dynamodb_table = "architectf-timeline"
   }
-  required_version = "~> 1.1"
+  required_version = "1.8.3"
 }
 
 provider "aws" {
