@@ -30,7 +30,7 @@ jobs:
           tofu fmt -check
           tofu validate
       - name: Install a flaked Nix
-        uses: DeterminateSystems/nix-installer-action@v13
+        uses: DeterminateSystems/nix-installer-action@v14
       - name: Perform unit tests
         run: |
           (cd calendar && nix develop -c npm test)
