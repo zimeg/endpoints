@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/zimeg/endpoints#readme",
   "devDependencies": {
-    "@biomejs/biome": "1.8.3"
+    "@biomejs/biome": "1.9.3"
   }
 }
