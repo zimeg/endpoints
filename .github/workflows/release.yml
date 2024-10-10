@@ -19,30 +19,28 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - name: Prepare Tofu tooling
-        uses: opentofu/setup-opentofu@v1
+      - name: Install a flaked Nix
+        uses: DeterminateSystems/nix-installer-action@v14
       - name: Outline known infrustructure
         working-directory: .infrastructure
-        run: tofu init
+        run: nix run .#tofu -- init
       - name: Ensure infrastructure reason
         working-directory: .infrastructure
         run: |
-          tofu fmt -check
-          tofu validate
-      - name: Install a flaked Nix
-        uses: DeterminateSystems/nix-installer-action@v14
+          nix run .#tofu -- fmt -check
+          nix run .#tofu -- validate
       - name: Perform unit tests
         run: |
           (cd calendar && nix develop -c npm test)
       - name: Plan the infrastructure changes
         if: github.event_name == 'pull_request'
         working-directory: .infrastructure
-        run: tofu plan
+        run: nix run .#tofu -- plan
         env:
           TF_VAR_hosted_zone_id: ${{ secrets.AWS_HOSTED_ZONE_ID }}
       - name: Push to production
         if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
         working-directory: .infrastructure
-        run: tofu apply -auto-approve
+        run: nix run .#tofu -- apply -auto-approve
         env:
           TF_VAR_hosted_zone_id: ${{ secrets.AWS_HOSTED_ZONE_ID }}

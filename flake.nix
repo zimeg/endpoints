@@ -58,5 +58,10 @@
             cp -f ${llrtLambda}/llrt-lambda-arm.zip .dist
           '';
         };
+        packages = {
+          tofu = pkgs.writeShellScriptBin "tofu" ''
+            ${pkgs.opentofu}/bin/tofu $@
+          '';
+        };
       });
 }
