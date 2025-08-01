@@ -31,7 +31,7 @@ jobs:
           nix run .#tofu -- validate
       - name: Perform unit tests
         run: |
-          (cd calendar && nix develop -c npm test)
+          (cd calendar && nix develop -c biome ci && nix develop -c npm run test)
       - name: Plan the infrastructure changes
         if: github.event_name == 'pull_request'
         working-directory: .infrastructure
