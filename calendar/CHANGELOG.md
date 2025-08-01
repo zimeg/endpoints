@@ -8,6 +8,7 @@ new major version.
 
 ## Changes - `v1`
 
+- build: update biome configurations to use the latest formats 2025-07-31
 - docs: describe the quintus format using the generic notation 2024-07-17
 - feat: return the quintus date of this current date for today 2024-07-17
 - feat: return an offset count of days since starting the year 2024-07-17
