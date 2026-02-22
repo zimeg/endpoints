@@ -4,32 +4,8 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     cooldown:
-      default-days: 4
+      default-days: 7
     schedule:
       interval: "monthly"
     labels:
       - "dependencies"
-  - package-ecosystem: "npm"
-    directory: "calendar"
-    cooldown:
-      default-days: 4
-    schedule:
-      interval: "monthly"
-    labels:
-      - "dependencies"
-  - package-ecosystem: "terraform"
-    directory: ".infrastructure"
-    cooldown:
-      default-days: 4
-    registries:
-      - opentofu
-    schedule:
-      interval: "monthly"
-    labels:
-      - "dependencies"
-registries:
-  opentofu:
-    type: git
-    url: https://github.com
-    username: x-access-token
-    password: ${{secrets.OPENTOFU_REGISTRY_TOKEN}}

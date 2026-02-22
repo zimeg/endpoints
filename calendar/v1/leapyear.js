@@ -1,17 +1,32 @@
-import { error } from "./_errors.js";
-
-export function leapyear(path) {
-  const parts = path.split("/");
-  if (parts.length === 1) {
-    return error("calendar_year_missing");
-  } else if (parts.length !== 2) {
-    return error("calendar_path_unexpected");
+export function leapyear(year) {
+  if (!year) {
+    return {
+      status: 400,
+      body: {
+        ok: false,
+        error: {
+          code: "calendar_year_missing",
+          message: "No year was provided",
+          remediation: "Include a year with request path",
+        },
+      },
+    };
   }
-  if (!/^[+-]?\d+$/.test(parts[1])) {
-    return error("calendar_year_invalid");
+  if (!/^[+-]?\d+$/.test(year)) {
+    return {
+      status: 400,
+      body: {
+        ok: false,
+        error: {
+          code: "calendar_year_invalid",
+          message: "The provided year has an invalid format",
+          remediation: "Use an integer",
+        },
+      },
+    };
   }
-  const year = parseInt(parts[1], 10);
-  const leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+  const num = parseInt(year, 10);
+  const leap = (num % 4 == 0 && num % 100 != 0) || num % 400 == 0;
   return {
     status: 200,
     body: {
