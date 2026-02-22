@@ -19,8 +19,8 @@
       devShells = each (pkgs: {
         default = pkgs.mkShell {
           packages = [
-            pkgs.biome
-            pkgs.nodejs
+            pkgs.biome # https://github.com/biomejs/biome
+            pkgs.nodejs # https://github.com/nodejs/node
           ];
         };
       });
