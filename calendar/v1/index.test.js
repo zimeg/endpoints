@@ -1,3 +1,5 @@
+import { describe, it } from "node:test";
+import assert from "node:assert";
 import { handler } from "./index.js";
 
 describe("expected object for lambda invocations", () => {

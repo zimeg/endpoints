@@ -1,0 +1,21 @@
+{
+  "name": "endpoints",
+  "version": "2026.2.22",
+  "private": true,
+  "type": "module",
+  "description": "an unorganized collection of endpoints",
+  "main": "server.js",
+  "scripts": {
+    "test": "node --test calendar/v1/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zimeg/endpoints.git"
+  },
+  "author": "@zimeg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zimeg/endpoints/issues"
+  },
+  "homepage": "https://github.com/zimeg/endpoints#readme"
+}

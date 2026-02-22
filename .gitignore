@@ -1,12 +1,2 @@
-# Development leftovers
 .direnv
-.env
-
-# Distribution data
-.dist
-
-# Infrastructure remnants
-.terraform
-
-# Dependencies installed
-node_modules
+result

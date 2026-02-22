@@ -1,3 +1,5 @@
+import { describe, it } from "node:test";
+import assert from "node:assert";
 import { error } from "./_errors.js";
 
 describe("response shapes indicate errors", () => {

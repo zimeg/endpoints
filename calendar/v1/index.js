@@ -1,6 +1,6 @@
-import { epoch } from "epoch.js";
-import { leapyear } from "leapyear.js";
-import { today } from "today.js";
+import { epoch } from "./epoch.js";
+import { leapyear } from "./leapyear.js";
+import { today } from "./today.js";
 
 function router(event) {
   const path = event.pathParameters?.path;
