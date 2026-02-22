@@ -28,44 +28,26 @@ describe("extra days in a year are counted", () => {
 
 describe("erroneous requests are handled well", () => {
   it("fails when a calendar year is missing", () => {
-    const path = "leapyear";
-    const response = leapyear(path);
-    const expected = {
-      error: {
-        code: "calendar_year_missing",
-      },
-    };
+    const response = leapyear("leapyear");
     assert.equal(response.status, 400);
     assert.equal(response.body.ok, false);
-    assert.equal(response.body.error?.code, expected.error.code);
+    assert.equal(response.body.error?.code, "calendar_year_missing");
   });
 
   it("fails when years are not numeric", () => {
     const years = ["now", "year"];
     for (const year of years) {
-      const path = `leapyear/${year}`;
-      const response = leapyear(path);
-      const expected = {
-        error: {
-          code: "calendar_year_invalid",
-        },
-      };
+      const response = leapyear(`leapyear/${year}`);
       assert.equal(response.status, 400);
       assert.equal(response.body.ok, false);
-      assert.equal(response.body.error?.code, expected.error.code);
+      assert.equal(response.body.error?.code, "calendar_year_invalid");
     }
   });
 
   it("fails with additional path information", () => {
-    const path = "leapyear/2024/unknown";
-    const response = leapyear(path);
-    const expected = {
-      error: {
-        code: "calendar_path_unexpected",
-      },
-    };
+    const response = leapyear("leapyear/2024/unknown");
     assert.equal(response.status, 400);
     assert.equal(response.body.ok, false);
-    assert.equal(response.body.error?.code, expected.error.code);
+    assert.equal(response.body.error?.code, "calendar_path_unexpected");
   });
 });
