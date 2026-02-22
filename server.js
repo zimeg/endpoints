@@ -1,26 +1,41 @@
 import { createServer } from "node:http";
-import { handler } from "./calendar/v1/index.js";
+import { epoch } from "./calendar/v1/epoch.js";
+import { leapyear } from "./calendar/v1/leapyear.js";
+import { today } from "./calendar/v1/today.js";
 
 const port = process.env.PORT || 8083;
-const prefix = "/v1/calendar/";
 
-const server = createServer((req, res) => {
-  if (!req.url.startsWith(prefix)) {
-    res.writeHead(404, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: false, error: { code: "not_found" } }));
-    return;
+export function route(url) {
+  if (url === "/v1/calendar/epoch") {
+    return epoch();
+  } else if (url.startsWith("/v1/calendar/leapyear")) {
+    return leapyear(url.slice("/v1/calendar/".length));
+  } else if (url === "/v1/calendar/today") {
+    return today();
   }
-  const path = req.url.slice(prefix.length);
-  const event = {
-    httpMethod: req.method,
-    path: req.url,
-    pathParameters: { path },
+  return {
+    status: 404,
+    body: {
+      ok: false,
+      error: {
+        code: "method_not_found",
+        message: `No method found for the provided path: ${url}`,
+      },
+    },
   };
-  const result = handler(event, undefined);
-  res.writeHead(result.statusCode, result.headers);
-  res.end(result.body);
-});
+}
 
-server.listen(port, () => {
-  console.log(`endpoints listening on port ${port}`);
-});
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const server = createServer((req, res) => {
+    const response = route(req.url);
+    res.writeHead(response.status, {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    });
+    res.end(JSON.stringify(response.body));
+  });
+
+  server.listen(port, () => {
+    console.log(`endpoints listening on port ${port}`);
+  });
+}

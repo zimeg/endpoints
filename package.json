@@ -6,7 +6,7 @@
   "description": "an unorganized collection of endpoints",
   "main": "server.js",
   "scripts": {
-    "test": "node --test calendar/v1/*.test.js"
+    "test": "node --test **/*.test.js"
   },
   "repository": {
     "type": "git",
