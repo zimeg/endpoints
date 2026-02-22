@@ -1,6 +1,5 @@
-export function leapyear(path) {
-  const parts = path.split("/");
-  if (parts.length === 1) {
+export function leapyear(year) {
+  if (!year) {
     return {
       status: 400,
       body: {
@@ -8,24 +7,12 @@ export function leapyear(path) {
         error: {
           code: "calendar_year_missing",
           message: "No year was provided",
-          remediation: "Include a year with the request",
-        },
-      },
-    };
-  } else if (parts.length !== 2) {
-    return {
-      status: 400,
-      body: {
-        ok: false,
-        error: {
-          code: "calendar_path_unexpected",
-          message: "Unexpected path information was provided",
-          remediation: "Remove additional request details",
+          remediation: "Include a year with request path",
         },
       },
     };
   }
-  if (!/^[+-]?\d+$/.test(parts[1])) {
+  if (!/^[+-]?\d+$/.test(year)) {
     return {
       status: 400,
       body: {
@@ -38,8 +25,8 @@ export function leapyear(path) {
       },
     };
   }
-  const year = parseInt(parts[1], 10);
-  const leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+  const num = parseInt(year, 10);
+  const leap = (num % 4 == 0 && num % 100 != 0) || num % 400 == 0;
   return {
     status: 200,
     body: {

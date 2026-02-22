@@ -169,17 +169,13 @@ String. Possible suggestion to prevent the error.
 
 ### Error codes
 
-#### `calendar_path_unexpected`
-
-Unexpected path information was provided. Remove additional request details.
-
 #### `calendar_year_invalid`
 
 The provided year has an invalid format. Use an integer.
 
 #### `calendar_year_missing`
 
-No year was provided. Include a year with the request.
+No year was provided. Include a year with request path.
 
 [8601]: https://en.wikipedia.org/wiki/ISO_8601
 [epoch]: https://en.wikipedia.org/wiki/Epoch_(computing)

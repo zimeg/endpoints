@@ -9,7 +9,7 @@ export function route(url) {
   if (url === "/v1/calendar/epoch") {
     return epoch();
   } else if (url.startsWith("/v1/calendar/leapyear")) {
-    return leapyear(url.slice("/v1/calendar/".length));
+    return leapyear(url.slice("/v1/calendar/leapyear/".length));
   } else if (url === "/v1/calendar/today") {
     return today();
   }
